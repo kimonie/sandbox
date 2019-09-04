@@ -1,6 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.listen(3000);
 
@@ -12,14 +16,12 @@ app.get('/profile', (req, res) => {
     res.send('getting profile')
 });
 
-
 app.post('/profile', (req, res) => {
-
+    console.log(req.body);
     const user =  {
         name: 'sally',
         hobby: 'chilling'
     }
-
 
     res.send(user);
 })
