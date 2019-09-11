@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Navigation from './components/Navigation/navigation';
+
+
 import './App.css';
 
 class App extends Component {
