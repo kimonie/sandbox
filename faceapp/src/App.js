@@ -5,6 +5,7 @@ import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/navigation';
 import Logo from './components/Logo/logo';
 import ImageLinkForm from './components/ImageLinkForm/imageLinkForm';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Rank from './components/Rank/rank';
 
 import 'tachyons';
@@ -34,7 +35,6 @@ const particleOptions = {
     }
   }
 }
-  
 
 class App extends Component {
   constructor() {
@@ -74,8 +74,7 @@ class App extends Component {
         <Logo />
         <Rank />
         <ImageLinkForm onInputChange={ this.onInputChange } onButtonSubmit={ this.onButtonSubmit }/>
-        
-        {/* <FaceRegognition /> */}
+        <FaceRecognition />
       </div>
     );
   }
