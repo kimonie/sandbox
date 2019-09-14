@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
+import Clarifai from 'clarifai'; 
 
 import Navigation from './components/Navigation/navigation';
 import Logo from './components/Logo/logo';
@@ -9,17 +10,31 @@ import Rank from './components/Rank/rank';
 import 'tachyons';
 import './App.css';
 
+const app = new Clarifai.App({
+  apiKey: '2e36ec97d9604372b94ffa380c4c2eba'
+ });
+
 const particleOptions = {
   particles: {
     number: {
-      value: 30,
+      value: 120,
       density: {
         enable: true,
-        value_area: 800
+        value_area: 700
+      }
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse"
       }
     }
   }
 }
+  
 
 class App extends Component {
   constructor() {
@@ -28,7 +43,7 @@ class App extends Component {
     this.state = {
       input: ''
     }
-  }
+  } 
 
   onInputChange = event => {
     console.log(event.target.value)
@@ -36,14 +51,19 @@ class App extends Component {
 
   onButtonSubmit = () => {
     console.log('click')
-    app.models.predict("a403429f2ddf4b49b307e318f00e528b", "https://samples.clarifai.com/face-det.jpg").then(
-      function(response) {
-        // do something with response
-      },
-      function(err) {
-        // there was an error
-      }
-    );
+    app.models
+      .predict(
+        "a403429f2ddf4b49b307e318f00e528b", 
+        "https://samples.clarifai.com/face-det.jpg"
+        )
+      .then(
+        function(response) {
+          console.log(response);
+        },
+        function(err) {
+          
+        }
+      );
   }
 
   render() {
@@ -55,11 +75,8 @@ class App extends Component {
         <Rank />
         <ImageLinkForm onInputChange={ this.onInputChange } onButtonSubmit={ this.onButtonSubmit }/>
         
-
-      {/* <FaceRegognition /> */}
-
+        {/* <FaceRegognition /> */}
       </div>
-     
     );
   }
 
