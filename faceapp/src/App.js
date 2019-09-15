@@ -54,12 +54,11 @@ class App extends Component {
     this.setState({imageUrl: this.state.input})
     app.models
       .predict(
-        Clarifai.GENERAL_MODEL, 
-        "https://samples.clarifai.com/face-det.jpg"
+        Clarifai.FACE_DETECT_MODEL, this.state.input
         )
       .then(
         function(response) {
-          console.log(response);
+          console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
         },
         function(err) {
           
