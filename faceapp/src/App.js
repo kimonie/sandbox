@@ -41,19 +41,20 @@ class App extends Component {
     super();
 
     this.state = {
-      input: ''
+      input: '',
+      imageUrl: ''
     }
   } 
 
   onInputChange = event => {
-    console.log(event.target.value)
+    this.setState({input: event.target.value})
   }
 
   onButtonSubmit = () => {
-    console.log('click')
+    this.setState({imageUrl: this.state.input})
     app.models
       .predict(
-        "a403429f2ddf4b49b307e318f00e528b", 
+        Clarifai.GENERAL_MODEL, 
         "https://samples.clarifai.com/face-det.jpg"
         )
       .then(
@@ -74,7 +75,7 @@ class App extends Component {
         <Logo />
         <Rank />
         <ImageLinkForm onInputChange={ this.onInputChange } onButtonSubmit={ this.onButtonSubmit }/>
-        <FaceRecognition />
+        <FaceRecognition imageUrl={ this.state.imageUrl } />
       </div>
     );
   }
